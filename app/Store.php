@@ -6,12 +6,22 @@ use Illuminate\Database\Eloquent\Model;
 
 class Store extends Model
 {
-    public function user()
+    /**
+     * Return relationship with User
+     *
+     * @return Object
+     */
+    public function user(): Object
     {
         return $this->belongsTo(User::class);
     }
 
-    public function products()
+    /**
+     * Return relationship with Products
+     *
+     * @return Object
+     */
+    public function products(): Object
     {
         return $this->hasMany(Product::class);
     }

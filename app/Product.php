@@ -6,7 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
-    public function store()
+    /**
+     * Return relationship with Store
+     *
+     * @return Object
+     */
+    public function store(): Object
     {
         return $this->belongsTo(Store::class);
     }
