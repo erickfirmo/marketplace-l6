@@ -4,9 +4,27 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Store;
 
 class StoreController extends Controller
 {
+    /**
+     * Store model
+     *
+     * @var App\Store
+     */
+    protected $store;
+
+    /**
+     * Class constructor
+     *
+     * @param Store $store
+     */
+    public function __construct(Store $store)
+    {
+        $this->store = $store;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +32,9 @@ class StoreController extends Controller
      */
     public function index()
     {
-        //
+        $stores = $this->store->paginate(10);
+
+        return view('admin.stores.index', compact('stores'));
     }
 
     /**
