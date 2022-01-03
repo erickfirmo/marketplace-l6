@@ -44,7 +44,9 @@ class StoreController extends Controller
      */
     public function create()
     {
-        //
+        $users = \App\User::all(['id', 'name']);
+
+        return view('admin.stores.create', compact('users'));
     }
 
     /**
@@ -55,7 +57,7 @@ class StoreController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //$data = $request->all();
     }
 
     /**
