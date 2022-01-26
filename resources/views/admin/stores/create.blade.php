@@ -25,13 +25,13 @@
     </div>
     <div>
         <label for="user">Usuário</label>
-        <select name="user" id="user">
+        <select name="user_id" id="user">
             @foreach ($users as $user)
                 <option value="{{ $user->id }}">{{ $user->name }} </option>
             @endforeach
         </select>
     </div>
     <div>
-        <button type="submit">Criar</button>
+        <button type="submit">Criar Loja</button>
     </div>
 </form>
