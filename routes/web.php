@@ -16,7 +16,9 @@ Route::get('/', function () {
 });
 
 Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function() {
-    Route::get('/stores', 'StoreController@index')->name('stores.index');
-    Route::get('/stores/create', 'StoreController@create')->name('stores.create');
-    Route::post('/stores/store', 'StoreController@store')->name('stores.store');
+    Route::prefix('/stores')->name('stores.')->group(function() {
+        Route::get('/', 'StoreController@index')->name('index');
+        Route::get('/create', 'StoreController@create')->name('create');
+        Route::post('/store', 'StoreController@store')->name('store');
+    });
 });
