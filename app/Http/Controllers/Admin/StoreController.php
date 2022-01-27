@@ -98,7 +98,11 @@ class StoreController extends Controller
      */
     public function update(Request $request, Store $store)
     {
-        //
+        $data = $request->all();
+
+        $store->update($data);
+
+        return redirect()->route('admin.stores.edit', [ 'store' => $store ]);
     }
 
     /**
