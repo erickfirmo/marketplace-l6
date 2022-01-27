@@ -62,7 +62,7 @@ class StoreController extends Controller
         $user = \App\User::find($data['user_id']);
         $store = $user->store()->create($data);
 
-        return $store;
+        return redirect()->route('admin.stores.edit', [ 'store' => $store ]);
     }
 
     /**
@@ -82,9 +82,11 @@ class StoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Store $store)
     {
-        //
+        $users = \App\User::all(['id', 'name']);
+
+        return view('admin.stores.edit', compact('store', 'users'));
     }
 
     /**
@@ -94,7 +96,7 @@ class StoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Store $store)
     {
         //
     }
