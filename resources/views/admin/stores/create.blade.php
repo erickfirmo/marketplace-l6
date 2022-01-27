@@ -4,38 +4,36 @@
 <h1>Criar Loja</h1>
 <form action="{{ route('admin.stores.store') }}" method="post">
     @csrf
-    <div>
+    <div class="form-group">
         <label for="name">Nome da Loja</label>
-        <input id="name" type="text" name="name">
+        <input id="name" type="text" name="name" class="form-control">
     </div>
-
-    <div>
+    <div class="form-group">
         <label for="description">Descrição</label>
-        <input id="description" type="text" name="descripton">
+        <input id="description" type="text" name="descripton" class="form-control">
     </div>
-
-    <div>
+    <div class="form-group">
         <label for="phone">Telefone</label>
-        <input id="phone" type="text" name="phone">
+        <input id="phone" type="text" name="phone" class="form-control">
     </div>
-    <div>
-        <label for="mobile_phone">Celular/Whatsapp</label>
-        <input id="mobile_phone" type="text" name="mobile_phone">
+    <div class="form-group">
+        <label for="mobile_phone">Celular/WhatsApp</label>
+        <input id="mobile_phone" type="text" name="mobile_phone" class="form-control">
     </div>
-    <div>
+    <div class="form-group">
         <label for="slug">Slug</label>
-        <input id="slug" type="text" name="slug">
+        <input id="slug" type="text" name="slug" class="form-control">
     </div>
-    <div>
+    <div class="form-group">
         <label for="user">Usuário</label>
-        <select name="user_id" id="user">
+        <select name="user_id" id="user" class="form-control">
             @foreach ($users as $user)
                 <option value="{{ $user->id }}">{{ $user->name }} </option>
             @endforeach
         </select>
     </div>
-    <div>
-        <button type="submit">Criar Loja</button>
+    <div class="mt-3">
+        <button type="submit" class="btn btn-lg btn-success">Criar Loja</button>
     </div>
 </form>
 @endsection
