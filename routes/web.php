@@ -20,5 +20,8 @@ Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function() {
         Route::get('/', 'StoreController@index')->name('index');
         Route::get('/create', 'StoreController@create')->name('create');
         Route::post('/store', 'StoreController@store')->name('store');
+        Route::get('/{store}/edit', 'StoreController@edit')->name('edit');
+        Route::post('/{store}/update', 'StoreController@update')->name('update');
+        Route::delete('/{store}/destroy', 'StoreController@destroy')->name('destroy');
     });
 });
