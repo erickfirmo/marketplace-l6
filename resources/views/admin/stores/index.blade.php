@@ -18,7 +18,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="3"></td>
+                    <td colspan="3">Nenhum registro encontrado</td>
                 </tr>
             @endforelse
         </tbody>
