@@ -59,7 +59,7 @@ class StoreController extends Controller
     {
         $data = $request->all();
 
-        $user = App\User::find($data['user_id']);
+        $user = \App\User::find($data['user_id']);
         $store = $user->store()->create($data);
 
         return $store;
