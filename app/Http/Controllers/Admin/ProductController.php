@@ -23,6 +23,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = $this->product->paginate(10);
+
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -34,7 +36,7 @@ class ProductController extends Controller
     {
         $stores = \App\Store::all(['id', 'name']);
 
-        return view('admin.stores.create', compact('stores'));
+        return view('admin.products.create', compact('stores'));
     }
 
     /**
@@ -69,7 +71,7 @@ class ProductController extends Controller
     {
         $product = $this->product->find($product);
 
-        return view('admin.stores.edit', compact('product'));
+        return view('admin.products.edit', compact('product'));
     }
 
     /**
