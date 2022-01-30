@@ -15,7 +15,8 @@
                     <td>{{ $store->id }}</td>
                     <td>{{ $store->name}}</td>
                     <td>
-                        <a href="{{ route('admin.stores.edit', ['store' => $store->id ]) }}" class="btn btn-sm btn-default">Editar</a>
+                        <a href="{{ route('admin.stores.edit', ['store' => $store->id ]) }}" class="btn btn-sm btn-primary">EDITAR</a>
+                        <a href="{{ route('admin.stores.destroy', ['store' => $store->id ]) }}" class="btn btn-sm btn-danger">REMOVER</a>
                     </td>
                 </tr>
             @empty
