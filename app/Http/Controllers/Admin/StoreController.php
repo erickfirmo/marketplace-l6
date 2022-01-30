@@ -62,6 +62,8 @@ class StoreController extends Controller
         $user = \App\User::find($data['user_id']);
         $store = $user->store()->create($data);
 
+        flash('Loja criada com sucesso')->success();
+
         return redirect()->route('admin.stores.edit', [ 'store' => $store ]);
     }
 
@@ -102,6 +104,8 @@ class StoreController extends Controller
 
         $store->update($data);
 
+        flash('Loja atualizada com sucesso')->success();
+
         return redirect()->route('admin.stores.edit', [ 'store' => $store ]);
     }
 
@@ -114,6 +118,8 @@ class StoreController extends Controller
     public function destroy(Store $store)
     {
         $store->delete();
+
+        flash('Loja removida com sucesso')->success();
 
         return redirect()->route('admin.stores.index');
     }
