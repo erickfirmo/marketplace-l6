@@ -14,7 +14,9 @@
                 <tr>
                     <td>{{ $store->id }}</td>
                     <td>{{ $store->name}}</td>
-                    <td></td>
+                    <td>
+                        <a href="{{ route('admin.stores.edit', ['store' => $store->id ]) }}" class="btn btn-sm btn-default">Editar</a>
+                    </td>
                 </tr>
             @empty
                 <tr>
