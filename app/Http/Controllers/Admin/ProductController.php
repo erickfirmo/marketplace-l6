@@ -53,12 +53,12 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $product
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($product)
     {
-        //
+        return $product;
     }
 
     /**
@@ -69,7 +69,7 @@ class ProductController extends Controller
      */
     public function edit($product)
     {
-        $product = $this->product->find($product);
+        $product = $this->product->findOrFail($product);
 
         return view('admin.products.edit', compact('product'));
     }
@@ -94,6 +94,6 @@ class ProductController extends Controller
      */
     public function destroy($product)
     {
-        //
+        return $product;
     }
 }
