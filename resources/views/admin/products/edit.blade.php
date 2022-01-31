@@ -4,6 +4,7 @@
 <h1>Editar Produto</h1>
 <form action="{{ route('admin.products.update', [ 'product' => $product->id ]) }}" method="post">
     @csrf
+    @method('PUT')
     <div class="form-group">
         <label for="name">Nome do Produto</label>
         <input id="name" type="text" name="name" class="form-control" value="{{ $product->name }}">
@@ -23,14 +24,6 @@
     <div class="form-group">
         <label for="slug">Slug</label>
         <input id="slug" type="text" name="slug" class="form-control" value="{{ $product->slug }}">
-    </div>
-    <div class="form-group">
-        <label for="store">Loja</label>
-        <select name="store_id" id="store" class="form-control">
-            @foreach ($stores as $store)
-                <option value="{{ $store->id }}">{{ $store->name }} </option>
-            @endforeach
-        </select>
     </div>
     <div class="mt-3">
         <button type="submit" class="btn btn-lg btn-success">Atualizar Produto</button>
