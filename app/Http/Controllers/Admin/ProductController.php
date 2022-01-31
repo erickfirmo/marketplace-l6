@@ -98,7 +98,7 @@ class ProductController extends Controller
 
         $product->update($data);
 
-        flash('Produto criado com sucesso!')->success();
+        flash('Produto atualizada com sucesso!')->success();
 
         return redirect()->route('admin.products.edit', compact('product'));
     }
