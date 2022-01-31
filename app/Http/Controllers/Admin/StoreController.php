@@ -64,7 +64,7 @@ class StoreController extends Controller
 
         flash('Loja criada com sucesso')->success();
 
-        return redirect()->route('admin.stores.edit', [ 'store' => $store ]);
+        return redirect()->route('admin.stores.edit', compact('store'));
     }
 
     /**
