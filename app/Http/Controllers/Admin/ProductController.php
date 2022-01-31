@@ -47,7 +47,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        $store = \App\Store::findOrFail($data['store_id']);
+        $store->products()->create($data);
+
+        flash('Produto criado com sucesso!')->success();
+
+        return redirect()->route('admin;products.index');
     }
 
     /**
