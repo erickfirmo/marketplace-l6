@@ -50,11 +50,11 @@ class ProductController extends Controller
         $data = $request->all();
 
         $store = \App\Store::findOrFail($data['store_id']);
-        $store->products()->create($data);
+        $product = $store->products()->create($data);
 
         flash('Produto criado com sucesso!')->success();
 
-        return redirect()->route('admin;products.index');
+        return redirect()->route('admin.products.edit', compact('product'));
     }
 
     /**
@@ -76,9 +76,11 @@ class ProductController extends Controller
      */
     public function edit($product)
     {
+        $stores = \App\Store::all(['id', 'name']);
+
         $product = $this->product->findOrFail($product);
 
-        return view('admin.products.edit', compact('product'));
+        return view('admin.products.edit', compact('product', 'stores'));
     }
 
     /**
@@ -90,7 +92,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, $product)
     {
-        //
+        $data = $request->all();
+
+        $product = $this->product->findOrFail($product);
+
+        $product->update($data);
+
+        flash('Produto criado com sucesso!')->success();
+
+        return redirect()->route('admin.products.edit', compact('product'));
     }
 
     /**
