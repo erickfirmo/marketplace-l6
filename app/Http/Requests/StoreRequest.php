@@ -30,4 +30,23 @@ class StoreRequest extends FormRequest
             'mobile_phone'  => 'required',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'required' => 'Campo :attribute é obrigatório',
+            'min'=> 'Campo :attribute deve ter no mínimo :min caracteres',
+            'max'=> 'Campo :attribute deve ter no máximo :max caracteres',
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => 'nome',
+            'description' => 'descrição',
+            'phone' => 'telefone',
+            'mobile_phone' => 'celular',
+        ];
+    }
 }
