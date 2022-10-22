@@ -27,4 +27,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    public function getPrice()
+    {
+        return number_format($this->price, 2, ',', '.');
+    }
 }

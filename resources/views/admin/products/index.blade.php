@@ -17,7 +17,7 @@
                 <tr>
                     <td>{{ $product->id }}</td>
                     <td>{{ $product->name }}</td>
-                    <td>R$ {{ number_format($product->price, 2, ',', '.') }}</td>
+                    <td>R$ {{ $product->getPrice() }}</td>
                     <td>{{ $product->store->name }}</td>
                     <td>
                         <div class="btn-group">
