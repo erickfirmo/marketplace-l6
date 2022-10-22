@@ -59,10 +59,19 @@ class StoreController extends Controller
     {
         $data = $request->all();
 
-        $user = \App\User::find($data['user_id']);
+        $user = auth()->user();
+
+
+        if($user->store()->exists()) {
+            flash('Você usuário já possui uma loja cadastrada!')->error();
+
+            return redirect()->route('admin.stores.create');
+        }
+
+
         $store = $user->store()->create($data);
 
-        flash('Loja criada com sucesso')->success();
+        flash('Loja criada com sucesso!')->success();
 
         return redirect()->route('admin.stores.edit', compact('store'));
     }
