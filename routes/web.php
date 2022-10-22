@@ -13,8 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
-
+})->name('home');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function() {
@@ -23,8 +22,6 @@ Route::group(['middleware' => 'auth'], function() {
     });    
 });
 
-
-
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+//Route::get('/home', 'HomeController@index')->name('home');
