@@ -22,6 +22,7 @@ class StoreController extends Controller
      */
     public function __construct(Store $store)
     {
+        $this->middleware('user.has.store')->only(['create', 'store']);
         $this->store = $store;
     }
 
@@ -44,11 +45,6 @@ class StoreController extends Controller
      */
     public function create()
     {
-        if(auth()->user()->store()->exists()) {
-            flash('Você já possui uma loja cadastrada!')->warning();
-            return redirect()->route('admin.stores.index');
-        }
-
         $users = \App\User::all(['id', 'name']);
 
         return view('admin.stores.create', compact('users'));
@@ -62,12 +58,6 @@ class StoreController extends Controller
      */
     public function store(StoreRequest $request)
     {
-
-        if(auth()->user()->store()->exists()) {
-            flash('Você já possui uma loja cadastrada!')->warning();
-            return redirect()->route('admin.stores.index');
-        }
-
         $data = $request->all();
         $user = auth()->user();
 
