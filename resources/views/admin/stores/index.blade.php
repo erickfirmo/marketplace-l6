@@ -17,7 +17,7 @@
                     <td>{{ $store->name}}</td>
                     <td>
                         <div class="btn-group">
-                            <a href="{{ route('admin.stores.edit', ['store' => $store->id ]) }}" class="btn btn-sm btn-primary">EDITAR</a>
+                            <a href="{{ route('admin.stores.edit', ['store' => $store->id ]) }}" class="btn btn-sm btn-primary mx-1">EDITAR</a>
                             <form action="{{ route('admin.stores.destroy', ['store' => $store->id]) }}" method="post">
                                 @csrf
                                 @method('DELETE')
