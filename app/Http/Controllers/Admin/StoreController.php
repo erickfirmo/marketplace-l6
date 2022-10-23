@@ -32,9 +32,9 @@ class StoreController extends Controller
      */
     public function index()
     {
-        $stores = $this->store->paginate(10);
+        $store = auth()->user()->store;
 
-        return view('admin.stores.index', compact('stores'));
+        return view('admin.stores.index', compact('store'));
     }
 
     /**
@@ -44,6 +44,11 @@ class StoreController extends Controller
      */
     public function create()
     {
+        if(auth()->user()->store()->exists()) {
+            flash('Você já possui uma loja cadastrada!')->warning();
+            return redirect()->route('admin.stores.index');
+        }
+
         $users = \App\User::all(['id', 'name']);
 
         return view('admin.stores.create', compact('users'));
@@ -57,10 +62,14 @@ class StoreController extends Controller
      */
     public function store(StoreRequest $request)
     {
+
+        if(auth()->user()->store()->exists()) {
+            flash('Você já possui uma loja cadastrada!')->warning();
+            return redirect()->route('admin.stores.index');
+        }
+
         $data = $request->all();
-
         $user = auth()->user();
-
 
         if($user->store()->exists()) {
             flash('Você usuário já possui uma loja cadastrada!')->error();
@@ -68,9 +77,7 @@ class StoreController extends Controller
             return redirect()->route('admin.stores.create');
         }
 
-
         $store = $user->store()->create($data);
-
         flash('Loja criada com sucesso!')->success();
 
         return redirect()->route('admin.stores.edit', compact('store'));
