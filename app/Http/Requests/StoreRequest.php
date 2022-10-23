@@ -24,7 +24,7 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'          => 'required',
+            'name'          => 'required|unique:stores,name,' . $this->route('store'),
             'description'   => 'required|min:10|max:255',
             'phone'         => 'required',
             'mobile_phone'  => 'required',
