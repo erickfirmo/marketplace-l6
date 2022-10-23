@@ -24,8 +24,8 @@ class ProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'description' => 'required|min:30|max:255',
+            'name' => 'required|unique:products,name,' . $this->route('product'),
+            'description' => 'required|min:10|max:255',
             'body' => 'required',
             'price' => 'required',
         ];
@@ -37,6 +37,7 @@ class ProductRequest extends FormRequest
             'required' => 'Campo :attribute é obrigatório',
             'min'=> 'Campo :attribute deve ter no mínimo :min caracteres',
             'max'=> 'Campo :attribute deve ter no máximo :max caracteres',
+            'unique' => 'Este :attribute já está em uso'
         ];
     }
 
