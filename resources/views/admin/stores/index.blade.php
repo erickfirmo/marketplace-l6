@@ -1,7 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <a href="{{ route('admin.stores.create') }}" class="btn btn-lg btn-success">Criar Loja</a>
+    @if (!$store)
+        <a href="{{ route('admin.stores.create') }}" class="btn btn-lg btn-success">Criar Loja</a>
+    @endif
     <table class="table table-striped">
         <thead>
             <tr>
@@ -11,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            @forelse ($stores as $store)
+            @if ($store)
                 <tr>
                     <td>{{ $store->id }}</td>
                     <td>{{ $store->name}}</td>
@@ -26,13 +28,12 @@
                         </div>
                     </td>
                 </tr>
-            @empty
+            @else
                 <tr>
                     <td colspan="3">Nenhum registro encontrado</td>
                 </tr>
-            @endforelse
+            @endif
         </tbody>
     </table>
 
-    {{ $stores->links() }}
 @endsection
