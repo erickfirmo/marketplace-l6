@@ -34,9 +34,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $stores = \App\Store::all(['id', 'name']);
-
-        return view('admin.products.create', compact('stores'));
+        return view('admin.products.create');
     }
 
     /**
@@ -49,7 +47,9 @@ class ProductController extends Controller
     {
         $data = $request->all();
 
-        $store = \App\Store::findOrFail($data['store_id']);
+        $store_id = auth()->user()->store->id;
+
+        $store = \App\Store::findOrFail($store_id);
         $product = $store->products()->create($data);
 
         flash('Produto criado com sucesso!')->success();
@@ -76,11 +76,9 @@ class ProductController extends Controller
      */
     public function edit($product)
     {
-        $stores = \App\Store::all(['id', 'name']);
-
         $product = $this->product->findOrFail($product);
 
-        return view('admin.products.edit', compact('product', 'stores'));
+        return view('admin.products.edit', compact('product'));
     }
 
     /**
