@@ -2,19 +2,32 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Category;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\CategoryRequest;
 
 class CategoryController extends Controller
 {
-    /**
+	/**
+	 * @var Category
+	 */
+	private $category;
+
+	public function __construct(Category $category)
+	{
+		$this->category = $category;
+	}
+
+	/**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+	    $categories = $this->category->paginate(10);
+
+	    return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -24,18 +37,24 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+	    return view('admin.categories.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param CategoryRequest $request
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+    public function store(CategoryRequest $request)
     {
-        //
+	    $data = $request->all();
+
+	    $category = $this->category->create($data);
+
+	    flash('Categoria Criado com Sucesso!')->success();
+	    return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -52,34 +71,47 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($category)
     {
-        //
+	    $category = $this->category->findOrFail($category);
+
+	    return view('admin.categories.edit', compact('category'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param CategoryRequest $request
+	 * @param  int $category
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+    public function update(CategoryRequest $request, $category)
     {
-        //
+	    $data = $request->all();
+
+	    $category = $this->category->find($category);
+	    $category->update($data);
+
+	    flash('Categoria Atualizada com Sucesso!')->success();
+	    return redirect()->route('admin.categories.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($category)
     {
-        //
+	    $category = $this->category->find($category);
+	    $category->delete();
+
+	    flash('Categoria Removida com Sucesso!')->success();
+	    return redirect()->route('admin.categories.index');
     }
 }
