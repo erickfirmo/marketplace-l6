@@ -22,7 +22,13 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = auth()->user()->store->products()->paginate(10);
+        $store = auth()->user()->store;
+        
+        $products = [];
+
+        if($store) {
+            $products = $store->products()->paginate(10);
+        }
 
         return view('admin.products.index', compact('products'));
     }
@@ -48,6 +54,13 @@ class ProductController extends Controller
         $data = $request->all();
 
         $store = auth()->user()->store;
+
+        if (!$store) {
+            flash('Você deve criar uma loja para adicionar produtos!')->error();
+
+            return redirect()->route('admin.products.create');
+        }
+
         $product = $store->products()->create($data);
 
         flash('Produto criado com sucesso!')->success();

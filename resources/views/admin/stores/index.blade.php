@@ -32,7 +32,7 @@
                 </tr>
             @else
                 <tr>
-                    <td colspan="3">Nenhum registro encontrado</td>
+                    <td colspan="4">Nenhum registro encontrado</td>
                 </tr>
             @endif
         </tbody>

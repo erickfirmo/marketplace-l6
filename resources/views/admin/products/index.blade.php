@@ -32,11 +32,14 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="3">Nenhum registro encontrado</td>
+                    <td colspan="5">Nenhum registro encontrado</td>
                 </tr>
             @endforelse
         </tbody>
     </table>
 
-    {{ $products->links() }}
+    @if ($products)
+        {{ $products->links() }}
+    @endif
+
 @endsection
