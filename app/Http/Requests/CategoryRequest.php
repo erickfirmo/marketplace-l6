@@ -31,7 +31,7 @@ class CategoryRequest extends FormRequest
     public function messages()
     {
 		return [
-			'required' => 'Este campo é obrigatório!'
+			'required' => 'Este campo é obrigatório'
 		];
     }
 }
