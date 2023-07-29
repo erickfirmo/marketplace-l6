@@ -8,6 +8,8 @@ use Spatie\Sluggable\SlugOptions;
 
 class Category extends Model
 {
+    use HasSlug;
+
     protected $fillable = ['name', 'description', 'slug'];
 
     public function getSlugOptions() : SlugOptions
