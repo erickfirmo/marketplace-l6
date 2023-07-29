@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductRequest;
+use Illuminate\Http\Request;
 use App\Product;
+use App\Traits\UploadTrait;
 
 class ProductController extends Controller
 {
+    use UploadTrait;
+
     private $product;
 
     public function __construct(Product $product)
@@ -40,7 +44,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.products.create');
+        $categories = \App\Category::all(['id', 'name']);
+        return view('admin.products.create', compact('categories'));
     }
 
     /**
@@ -50,18 +55,21 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ProductRequest $request)
-    {
+    {        
         $data = $request->all();
+
+        $categories = $request->get('categories', null);
 
         $store = auth()->user()->store;
 
-        if (!$store) {
-            flash('Você deve criar uma loja para adicionar produtos!')->error();
-
-            return redirect()->route('admin.products.create');
-        }
-
         $product = $store->products()->create($data);
+        $product->categories()->sync($categories);
+
+        if($request->hasFile('photos')) {
+            $imagesData = $this->imageUpload($request->file('photos'), 'image');
+
+            $product->photos()->createMany($imagesData);
+        }
 
         flash('Produto criado com sucesso!')->success();
 
@@ -87,9 +95,11 @@ class ProductController extends Controller
      */
     public function edit($product)
     {
+        $categories = \App\Category::all(['id', 'name']);
+
         $product = $this->product->findOrFail($product);
 
-        return view('admin.products.edit', compact('product'));
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     /**
@@ -106,6 +116,16 @@ class ProductController extends Controller
         $product = $this->product->findOrFail($product);
 
         $product->update($data);
+
+        $categories = $request->get('categories', null);
+
+        $product->categories()->sync($categories);
+
+        if($request->hasFile('photos')) {
+            $imagesData = $this->imageUpload($request->file('photos'), 'image');
+
+            $product->photos()->createMany($imagesData);
+        }
 
         flash('Produto atualizado com sucesso!')->success();
 
