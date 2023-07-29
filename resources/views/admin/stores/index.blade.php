@@ -3,7 +3,7 @@
 @section('content')
     @if (!$store)
         <a href="{{ route('admin.stores.create') }}" class="btn btn-lg btn-success">Criar Loja</a>
-    @endif
+    @else
     <table class="table table-striped">
         <thead>
             <tr>
@@ -15,27 +15,30 @@
         </thead>
         <tbody>
             @if ($store)
-                <tr>
-                    <td>{{ $store->id }}</td>
-                    <td>{{ $store->name}}</td>
-                    <td>{{ $store->products()->count() }}</td>
-                    <td>
-                        <div class="btn-group">
-                            <a href="{{ route('admin.stores.edit', ['store' => $store->id ]) }}" class="btn btn-sm btn-primary mx-1">EDITAR</a>
-                            <form action="{{ route('admin.stores.destroy', ['store' => $store->id]) }}" method="post">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">REMOVER</button>
-                            </form>
-                        </div>
-                    </td>
-                </tr>
+            <tr>
+                <td>{{ $store->id }}</td>
+                <td>{{ $store->name}}</td>
+                <td>{{ $store->products()->count() }}</td>
+                <td>
+                    <div class="btn-group">
+                        <a href="{{ route('admin.stores.edit', ['store' => $store->id ]) }}" class="btn btn-sm btn-primary mx-1">EDITAR</a>
+                        <form action="{{ route('admin.stores.destroy', ['store' => $store->id]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-sm btn-danger">REMOVER</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
             @else
-                <tr>
-                    <td colspan="4">Nenhum registro encontrado</td>
-                </tr>
+            <tr>
+                <td colspan="4">Nenhum registro encontrado</td>
+            </tr>
             @endif
         </tbody>
     </table>
+
+    @endif
+
 
 @endsection
