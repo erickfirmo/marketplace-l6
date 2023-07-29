@@ -2,7 +2,7 @@
 
 @section('content')
 <h1>Criar Produto</h1>
-<form action="{{ route('admin.products.store') }}" method="post">
+<form action="{{ route('admin.products.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     @include('admin.products.partial._form')
     <div class="mt-3">
