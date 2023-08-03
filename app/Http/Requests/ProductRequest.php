@@ -28,8 +28,8 @@ class ProductRequest extends FormRequest
             'description' => 'required|min:10|max:255',
             'body' => 'required',
             'price' => 'required',
-            'categories' => 'nullable',
-            'categories.*' => 'required|array',
+            'categories' => 'nullable|array',
+            'categories.*' => 'required',
             'photos.*' => 'image'
         ];
     }
