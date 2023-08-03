@@ -29,7 +29,7 @@
 
     <div class="form-group">
         <label for="categories">Categorias</label>
-        <select name="categories[]" id="categories" class="form-control @error('categories') is-invalid @enderror" multiple>
+        <select name="categories[]" id="categories" class="form-control @error('categories.*') is-invalid @enderror" multiple>
             @foreach ($categories as $category)
                 <option value="{{ $category->id }}"
                     
@@ -40,12 +40,11 @@
                 >{{ $category->name  }}</option>
             @endforeach
         </select>
-        @error('categories')
+        @error('categories.*')
             <span class="invalid-feedback">{{ $message }}</span>
         @enderror
     </div>
 
-    @isset($product)
     <div class="form-group">
         <label for="photos">Fotos do Produto</label>
         <input id="photos" type="file" name="photos[]" multiple class="form-control @error('photos.*') is-invalid @enderror" value="{{ $product->photos ?? old('photos') }}">
@@ -53,7 +52,6 @@
             <span class="invalid-feedback">{{ $message }}</span>
         @enderror
     </div>
-    @endisset
 
     @isset($product)
     <div class="form-group">
