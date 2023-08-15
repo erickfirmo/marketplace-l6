@@ -38,15 +38,14 @@
                 
 
                 <li class="nav-item d-flex">
-                    @if(session()->has('cart'))
-                        <a href="{{ route('cart.index') }}" class="nav-link">
+                    <a href="{{ route('cart.index') }}" class="nav-link">
+                        @if(session()->has('cart') && count(session()->get('cart')) > 0)
                             <span class="badge badge-danger">{{ count(session()->get('cart')) }}</span>
-                        </a>
+                        @endif
                         <span class="my-auto">
                             <i class="fa fa-shopping-cart"></i>
                         </span>
-
-                    @endif
+                    </a>
                 </li>
                 
             </ul>
